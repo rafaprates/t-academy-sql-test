@@ -4,7 +4,8 @@ USE escola;
 
 CREATE TABLE alunos (
 	idAluno INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(32) NOT NULL
+    nome VARCHAR(32) NOT NULL,
+    data_nascimento DATETIME
 );
 
 create TABLE professores (
@@ -24,7 +25,7 @@ CREATE TABLE salas (
 
 CREATE TABLE IF NOT EXISTS materias (
 	idMateria INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(32),
+    nome VARCHAR(32) NOT NULL,
     idProfessor INT,
 	idPeriodo INT,
     idSala INT,
@@ -36,18 +37,17 @@ CREATE TABLE IF NOT EXISTS materias (
 
 CREATE TABLE alunos_materias (
 	idAlunosMaterias INT PRIMARY KEY AUTO_INCREMENT,
-	idAluno INT,
-    idMateria INT,
+	idAluno INT NOT NULL,
+    idMateria INT NOT NULL,
 	FOREIGN KEY (idAluno) REFERENCES alunos(idAluno),
 	FOREIGN KEY (idMateria) REFERENCES materias(idMateria)
 );
 
-DROP TABLE notas;
 CREATE TABLE notas (
 	idNota INT PRIMARY KEY AUTO_INCREMENT,
-	nota DOUBLE,
-	idAluno INT,
-    idMateria INT,
+	nota DOUBLE NOT NULL DEFAULT 0.0,
+	idAluno INT NOT NULL,
+    idMateria INT NOT NULL,
     criada_em DATETIME DEFAULT now(),
     modificada_em DATETIME DEFAULT now(),
     FOREIGN KEY (idAluno) REFERENCES alunos(idAluno),
@@ -62,8 +62,8 @@ CREATE TABLE notas_deletadas (
 
 CREATE TABLE review_materias (
 	idReview INT PRIMARY KEY AUTO_INCREMENT,
-    idAluno INT,
-	idMateria INT,
+    idAluno INT NOT NULL,
+	idMateria INT NOT NULL,
     review DOUBLE NOT NULL,
     criado_em DATETIME,
 	FOREIGN KEY (idMateria) REFERENCES materias(idMateria),
