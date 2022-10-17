@@ -42,21 +42,30 @@ CREATE TABLE alunos_materias (
 	FOREIGN KEY (idMateria) REFERENCES materias(idMateria)
 );
 
-
+DROP TABLE notas;
 CREATE TABLE notas (
 	idNota INT PRIMARY KEY AUTO_INCREMENT,
 	nota DOUBLE,
 	idAluno INT,
     idMateria INT,
+    criada_em DATETIME DEFAULT now(),
+    modificada_em DATETIME DEFAULT now(),
     FOREIGN KEY (idAluno) REFERENCES alunos(idAluno),
     FOREIGN KEY (idMateria) REFERENCES materias(idMateria)
 );
 
+DROP TABLE IF EXISTS notas_deletadas;
+CREATE TABLE notas_deletadas (
+	idNotaDeletada INT PRIMARY KEY AUTO_INCREMENT,
+	descricao VARCHAR(255)
+);
+
 CREATE TABLE review_materias (
-	idReview INT,
+	idReview INT PRIMARY KEY AUTO_INCREMENT,
     idAluno INT,
 	idMateria INT,
     review DOUBLE NOT NULL,
+    criado_em DATETIME,
 	FOREIGN KEY (idMateria) REFERENCES materias(idMateria),
     FOREIGN KEY (idAluno) REFERENCES alunos(idAluno)
 );
