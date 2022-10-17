@@ -65,7 +65,7 @@ CREATE TABLE review_materias (
     idAluno INT NOT NULL,
 	idMateria INT NOT NULL,
     review DOUBLE NOT NULL,
-    criado_em DATETIME,
+    criado_em DATETIME DEFAULT now(),
 	FOREIGN KEY (idMateria) REFERENCES materias(idMateria),
     FOREIGN KEY (idAluno) REFERENCES alunos(idAluno)
 );
