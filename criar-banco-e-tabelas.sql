@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS escola;
 CREATE DATABASE escola;
 USE escola;
 
@@ -68,3 +69,5 @@ CREATE TABLE review_materias (
 	FOREIGN KEY (idMateria) REFERENCES materias(idMateria),
     FOREIGN KEY (idAluno) REFERENCES alunos(idAluno)
 );
+
+USE escola;
