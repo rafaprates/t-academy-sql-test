@@ -1,15 +1,22 @@
-INSERT INTO alunos (nome)
+select * from alunos;
+
+INSERT INTO alunos (nome, data_nascimento)
 VALUES 
-("Miguel"),
-("Arthur"),
-("Gael"),
-("Heitor"),
-("Helena"),
-("Alice"),
-("Theo"),
-("Lauro"),
-("Davi"),
-("Gabriel");
+("Miguel", "2000-01-01"),
+("Arthur", "2002-01-01"),
+("Gael", "2004-01-01"),
+("Heitor", "2004-01-01"),
+("Helena", "2004-01-01"),
+("Alice", "2005-01-01"),
+("Theo", "2000-01-01"),
+("Lauro", "2001-01-01"),
+("Davi", "2001-01-01"),
+("Gabriel", "2000-01-01"),
+("Joelson", "2000-01-01");
+
+UPDATE alunos SET data_nascimento = "2000-01-02" WHERE nome = "Gabriel";
+DELETE FROM alunos WHERE nome = "Joelson";
+
 
 INSERT INTO professores (nome)
 VALUES
@@ -22,9 +29,11 @@ VALUES
 ("Bruna"),
 ("Gabriel"),
 ("Felipe"),
-("Amanda");
+("Amanda"),
+("Jandira");
 
-SELECT * FROM professores;
+UPDATE professores SET nome = "Joelma" WHERE nome = "Amanda";
+DELETE FROM alunos WHERE nome = "Joelma";
 
 
 INSERT INTO periodos (periodo)
@@ -38,7 +47,12 @@ VALUES
 ("2030-1"),
 ("2030-2"),
 ("2031-1"),
-("2031-2");
+("2031-2"),
+("2032-1");
+
+UPDATE periodos SET periodo = "2125-2" WHERE periodo = "2032-1";
+DELETE FROM periodos WHERE periodo = "2125-2";
+
 
 INSERT INTO salas (nome)
 VALUES
@@ -51,7 +65,12 @@ VALUES
 ("2A"),
 ("2B"),
 ("2C"),
-("2D");
+("2D"),
+("2E");
+
+UPDATE salas SET nome = "ABC" WHERE nome = "2E";
+DELETE FROM salas WHERE nome = "abc";
+
 
 INSERT INTO materias (nome, idProfessor, idPeriodo, idSala)
 VALUES
@@ -66,7 +85,11 @@ VALUES
 ("Ed. Física", 5, 1, 8),
 ("Ed. Física", 5, 2, 9),
 ("Química", 6, 1, 10),
-("Química", 6, 2, 10);
+("Química", 6, 2, 10),
+("ABC", 6, 2, 10);
+
+UPDATE materias SET nome = "ABC" WHERE nome = "2E";
+DELETE FROM materias WHERE nome = "ABC";
 
 
 INSERT INTO alunos_materias (idAluno, idMateria)
@@ -89,7 +112,6 @@ VALUES
 (4, 6),
 (6, 9);
 
-SELECT * FROM alunos_materias;
 
 INSERT INTO notas (nota, idAluno, idMateria)
 VALUES
@@ -106,7 +128,9 @@ VALUES
 (7.5, 4, 1),
 (7.5, 4, 1);
 
-SELECT * from alunos_materias;
+UPDATE notas SET nota = 10 WHERE idNota = (SELECT MAX(idAlunosMaterias) FROM alunos_materias);
+DELETE FROM notas WHERE idNota = (SELECT MAX(idAlunosMaterias) FROM alunos_materias);
+
 
 INSERT INTO review_materias (idAluno, idMateria, review)
 VALUES
@@ -119,6 +143,9 @@ VALUES
 (4, 8, 10.0),
 (4, 9, 9.0),
 (4, 6, 7.0),
-(4, 7, 7.0);
+(4, 7, 7.0),
+(5, 5, 5.0);
 
 
+UPDATE review_materias SET review = 10.0 WHERE idReview = 10;
+DELETE FROM review_materias WHERE idReview = 10;
