@@ -1,4 +1,6 @@
+DROP DATABASE escola;
 CREATE DATABASE escola;
+USE escola;
 
 CREATE TABLE alunos (
 	idAluno INT PRIMARY KEY AUTO_INCREMENT,
@@ -20,7 +22,7 @@ CREATE TABLE salas (
     nome VARCHAR(8) NOT NULL
 );
 
-CREATE TABLE materias (
+CREATE TABLE IF NOT EXISTS materias (
 	idMateria INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(32),
     idProfessor INT,
@@ -32,7 +34,7 @@ CREATE TABLE materias (
 );
 
 
-CREATE TABLE alunosMaterias (
+CREATE TABLE alunos_materias (
 	idAlunosMaterias INT PRIMARY KEY AUTO_INCREMENT,
 	idAluno INT,
     idMateria INT,
@@ -50,9 +52,11 @@ CREATE TABLE notas (
     FOREIGN KEY (idMateria) REFERENCES materias(idMateria)
 );
 
-CREATE TABLE review_professores (
-	idReviewProfessor INT,
+CREATE TABLE review_materias (
+	idReview INT,
+    idAluno INT,
 	idMateria INT,
     review DOUBLE NOT NULL,
-	FOREIGN KEY (idMateria) REFERENCES materias(idMateria)
+	FOREIGN KEY (idMateria) REFERENCES materias(idMateria),
+    FOREIGN KEY (idAluno) REFERENCES alunos(idAluno)
 );
