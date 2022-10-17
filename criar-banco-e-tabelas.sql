@@ -1,11 +1,10 @@
-DROP DATABASE escola;
 CREATE DATABASE escola;
 USE escola;
 
 CREATE TABLE alunos (
 	idAluno INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(32) NOT NULL,
-    data_nascimento DATETIME
+    data_nascimento DATE
 );
 
 create TABLE professores (
