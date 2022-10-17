@@ -36,6 +36,7 @@ ORDER BY materias.nome;
 SELECT * FROM nome_aluno_nome_materia_ja_cursadas;
 
 
+
 # Média histórica dos reviews dos professores por nome do professor
 CREATE VIEW media_historica_notas_professores
 AS
@@ -49,29 +50,13 @@ SELECT * FROM media_historica_notas_professores;
 
 
 
-
-
-
-
-
-
-
-
-CREATE VIEW nomes_alunos_professores_materias
+# Reviews
+CREATE VIEW reviews
 AS
-SELECT alunos.nome AS nomeAluno, materias.nome AS nomeMateria, professores.nome AS nomeProfessor FROM alunos_materias
+SELECT alunos.nome AS nome_aluno, materias.nome AS nome_materia, professores.nome AS nome_professor, review_materias.review AS nota FROM alunos_materias
 INNER JOIN alunos ON alunos.idAluno = alunos_materias.idAluno
 INNER JOIN materias ON materias.idMateria = alunos_materias.idMateria
-INNER JOIN professores ON materias.idProfessor = professores.idProfessor;
+INNER JOIN professores ON materias.idProfessor = professores.idProfessor
+INNER JOIN review_materias ON review_materias.idMateria = materias.idMateria;
 
-
-
-SELECT * FROM alunos_materias
-INNER JOIN alunos ON alunos.idAluno = alunos_materias.idAluno
-INNER JOIN materias ON materias.idMateria = alunos_materias.idMateria
-INNER JOIN professores ON materias.idProfessor = professores.idProfessor;
-
-
-
-
-
+SELECT * FROM reviews;
