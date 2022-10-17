@@ -17,3 +17,23 @@ FROM alunos
 INNER JOIN notas on notas.idAluno = alunos.idAluno
 GROUP BY alunos.nome
 HAVING coeficiente >= 7;
+
+# Alunos ordenados por ano de nascimento
+SELECT nome, date_format(data_nascimento, "%Y") as ano_nascimento
+FROM alunos
+GROUP BY alunos.nome
+ORDER BY ano_nascimento;
+
+# Listar alunos que são maiores de idade
+SELECT nome, date_format(data_nascimento, "%Y") as ano_nascimento,
+CASE
+	WHEN (date_format(data_nascimento, "%Y") < 2002) THEN "maior"
+    ELSE "menor de idade"
+END
+FROM alunos;
+
+
+# Listar alunos que começam com a letras A
+SELECT nome 
+FROM alunos
+WHERE nome LIKE "a%";
